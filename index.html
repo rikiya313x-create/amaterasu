@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EA-天照- | 無料FX自動売買ツール</title>
+  <meta name="description" content="3年間強制ロスカットゼロ。100万円を1000万円へ。完全無料のFX自動売買EA「天照」。XM口座開設のみで無料配布中。">
+  <meta property="og:title" content="EA-天照- | 無料FX自動売買ツール">
+  <meta property="og:description" content="3年間強制ロスカットゼロ。100万円を1000万円へ。完全無料配布中。">
+  <meta property="og:image" content="hero-bg.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>html { scroll-behavior: smooth; }</style>
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --gold-dark: #8a6a1a;
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a24;
+      --text: #e8e8f0;
+      --text-muted: #888899;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, rgba(0,0,0,0.75) 0%, rgba(10,8,20,0.82) 50%, rgba(0,5,15,0.78) 100%), url('hero-bg.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(201,168,76,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-catch {
+      font-size: clamp(1.1rem, 3vw, 1.6rem);
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 48px;
+    }
+
+    .hero-catch span {
+      color: var(--gold);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: var(--gold-dark);
+      opacity: 0.4;
+      align-self: stretch;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #000;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 24px rgba(201,168,76,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(201,168,76,0.45);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 15px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid var(--gold);
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(201,168,76,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 80px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title span {
+      color: var(--gold);
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 56px;
+      font-size: 1rem;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      margin: 0 auto 20px;
+      border-radius: 2px;
+    }
+
+    /* ========== RESULTS ========== */
+    .results {
+      background: var(--bg2);
+    }
+
+    .result-highlight {
+      background: linear-gradient(135deg, var(--bg3), #0f0f1a);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-highlight::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .result-big {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .result-detail {
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(201,168,76,0.6);
+    }
+
+    .timeline-year {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .timeline-text {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .timeline-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========== FEATURES ========== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(201,168,76,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.1);
+    }
+
+    .feature-num {
+      font-size: 0.7rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ========== IMAGE PLACEHOLDER ========== */
+    .image-section {
+      background: var(--bg2);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .img-placeholder {
+      background: var(--bg3);
+      border: 2px dashed rgba(201,168,76,0.3);
+      border-radius: 12px;
+      aspect-ratio: 16/10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .img-placeholder-icon {
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+
+    .img-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ========== OVERVIEW TABLE ========== */
+    .overview-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg3);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .overview-table tr {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .overview-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .overview-table th {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 18px 24px;
+      text-align: left;
+      width: 180px;
+      vertical-align: top;
+    }
+
+    .overview-table td {
+      padding: 18px 24px;
+      font-size: 0.95rem;
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    /* ========== STEPS ========== */
+    .steps {
+      background: var(--bg2);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      position: relative;
+    }
+
+    .step-card {
+      background: var(--bg3);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #000;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .step-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta-section {
+      background: linear-gradient(135deg, #0f0c18, #0a0d15);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .cta-title span {
+      color: var(--gold);
+    }
+
+    .cta-desc {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-size: 1rem;
+    }
+
+    .cta-warning {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 16px 24px;
+      max-width: 500px;
+      margin: 28px auto 0;
+      line-height: 1.6;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #060608;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ========== STICKY NAV ========== */
+    .sticky-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform 0.35s ease;
+    }
+    .sticky-nav.visible { transform: translateY(0); }
+    .sticky-nav-logo {
+      font-size: 1.1rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sticky-nav .btn-primary {
+      font-size: 0.85rem;
+      padding: 10px 24px;
+    }
+
+    /* ========== BACK TO TOP ========== */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #000;
+      font-size: 1.2rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.3s;
+      box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+      z-index: 998;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    .back-to-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(201,168,76,0.5); }
+
+    /* ========== ACCORDION ========== */
+    .guide-section {
+      background: var(--bg);
+    }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .accordion-item {
+      background: var(--bg3);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .accordion-item.open {
+      border-color: rgba(201,168,76,0.45);
+    }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .accordion-header:hover {
+      background: rgba(201,168,76,0.05);
+    }
+
+    .accordion-step-badge {
+      min-width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.85rem;
+      color: #000;
+      flex-shrink: 0;
+    }
+
+    .accordion-title-wrap {
+      flex: 1;
+    }
+
+    .accordion-label {
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 3px;
+    }
+
+    .accordion-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .accordion-arrow {
+      color: var(--gold);
+      font-size: 1rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .accordion-item.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 24px 28px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .guide-step-num {
+      min-width: 26px;
+      height: 26px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .guide-step-text strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .guide-step-text span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .guide-note {
+      margin-top: 16px;
+      background: rgba(201,168,76,0.06);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ========== MOBILE RESPONSIVE FIXES ========== */
+    @media (max-width: 768px) {
+      .vision-grid { grid-template-columns: 1fr !important; }
+      .logic-inner { grid-template-columns: 1fr !important; }
+      .para-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ========== SCROLL ANIMATION ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 600px) {
+      .hero-stats { gap: 24px; }
+      .stat-divider { display: none; }
+      .btn-group { flex-direction: column; align-items: center; }
+      .overview-table th { width: 120px; padding: 14px 16px; }
+      .overview-table td { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== STICKY NAV ===== -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="sticky-nav-logo">EA-天照-</div>
+  <a href="https://affx.click/EtA7p" target="_blank" class="btn-primary">XM口座を開設する</a>
+</nav>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <img src="amaterasu.jpg" alt="天照" style="width: clamp(80px, 15vw, 140px); border-radius: 50%; border: 2px solid rgba(201,168,76,0.4); margin-bottom: 20px; object-fit: cover; aspect-ratio: 1;">
+  <div class="hero-badge">全ての値幅を利益に変える。</div>
+  <h1>EA-天照-</h1>
+  <p class="hero-sub">日本一の圧倒的高頻度トレード</p>
+  <p class="hero-catch">
+    改良を重ねた<span>９年の歴史</span>。<br>
+    直近３年間で100万円を<span>1000万円</span>に。
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num">10倍</span>
+      <div class="stat-label">資産増加実績</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">3年間</span>
+      <div class="stat-label">強制ロスカットなし</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">8通貨</span>
+      <div class="stat-label">同時稼働対応</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">25%</span>
+      <div class="stat-label">平均月利</div>
+    </div>
+  </div>
+
+  <!-- 初心者向けガイド告知 -->
+  <a href="#setup-guide" style="
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 30px;
+    padding: 10px 22px;
+    margin-top: 40px;
+    text-decoration: none;
+    transition: background 0.3s;
+  " onmouseover="this.style.background='rgba(201,168,76,0.15)'" onmouseout="this.style.background='rgba(201,168,76,0.08)'">
+    <span style="font-size: 1rem;">🔰</span>
+    <span style="font-size: 0.85rem; color: var(--text-muted);">
+      <strong style="color: var(--gold);">初心者の方へ</strong>　XM登録〜EA設置まで、詳しい手順をページ下部に掲載しています
+    </span>
+    <span style="color: var(--gold); font-size: 0.8rem;">↓</span>
+  </a>
+
+</section>
+
+
+<!-- ===== VISION ===== -->
+<section style="background: var(--bg); padding: 100px 20px;">
+  <div class="container">
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;" class="fade-in vision-grid">
+
+      <div>
+        <div style="font-size: 0.75rem; letter-spacing: 0.25em; color: var(--gold); margin-bottom: 16px;">YOUR FUTURE</div>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; line-height: 1.3; margin-bottom: 28px;">
+          あなたが<span style="color: var(--gold);">眠っている間も</span>、<br>相場は動き続ける。
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
+          <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="min-width: 40px; height: 40px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🌙</div>
+            <div>
+              <div style="font-weight: 700; margin-bottom: 4px;">深夜2時でも稼働中</div>
+              <div style="font-size: 0.88rem; color: var(--text-muted);">あなたが寝ていても、遊んでいても、仕事していても24時間止まらない。</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="min-width: 40px; height: 40px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">📱</div>
+            <div>
+              <div style="font-weight: 700; margin-bottom: 4px;">チャートを見なくていい</div>
+              <div style="font-size: 0.88rem; color: var(--text-muted);">スマホを手放せない生活とはもうさよなら。設定したら完全放置でOK。</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="min-width: 40px; height: 40px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">🔄</div>
+            <div>
+              <div style="font-weight: 700; margin-bottom: 4px;">8通貨ペアが同時に動く</div>
+              <div style="font-size: 0.88rem; color: var(--text-muted);">1つのEAが8つの市場で同時に利益を狙う。これが他のEAとの圧倒的な差。</div>
+            </div>
+          </div>
+        </div>
+        <div style="background: rgba(201,168,76,0.07); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 16px 20px;">
+          <p style="font-size: 0.95rem; color: var(--text); font-weight: 600; line-height: 1.7;">
+            「お金のために時間を売る」のではなく、<br>
+            <span style="color: var(--gold);">「時間をお金に変える仕組み」</span>をつくる。<br>
+            それがEA-天照-です。
+          </p>
+        </div>
+      </div>
+
+      <div style="position: relative;">
+        <img src="vision.jpg" alt="自由なライフスタイル" style="width:100%; border-radius:16px; object-fit:cover; aspect-ratio: 4/5;">
+        <div style="position: absolute; bottom: -16px; right: -16px; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; font-weight: 900; font-size: 0.85rem; padding: 16px 20px; border-radius: 12px; line-height: 1.5; box-shadow: 0 8px 24px rgba(201,168,76,0.35);">
+          今日から<br>24時間稼働
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== RESULTS ===== -->
+<section class="results">
+  <div class="container">
+    <div class="section-label">Real Results</div>
+    <h2 class="section-title">数字が証明する<span>圧倒的な実績</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">バックテストではなく、実際のフォワードデータによる運用実績です。</p>
+
+    <div class="result-highlight fade-in">
+      <img src="gold.jpg" alt="資産増加イメージ" style="width:100%; max-width:600px; border-radius:10px; margin-bottom:28px; opacity:0.85;">
+      <div class="result-big">100万 → 1000万円</div>
+      <div class="result-detail">2023年〜2026年 / 3年間の実運用 / 利益900万円 / 強制ロスカット0回</div>
+      <!-- REALTRADEの信頼性説明 -->
+      <div style="margin-top: 40px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.25); border-radius: 14px; padding: 28px 32px; text-align: left; max-width: 700px; margin-left: auto; margin-right: auto;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <div style="background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: #000; font-size: 0.7rem; font-weight: 900; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.1em;">第三者機関による証明</div>
+          <div style="font-size: 1rem; font-weight: 800;">REALTRADE とは？</div>
+        </div>
+        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 16px;">
+          REALTRADEは、MT4に専用ファイルを直接インストールして稼働させることで取引データがそのままリアルタイムで転送・公開される<strong style="color: var(--text);">第三者の実績管理サービス</strong>です。運用者が数字を自由に編集・改ざんすることは一切できず、口座の取引データがそのまま公開されます。
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+          <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 14px 16px;">
+            <div style="color: var(--gold); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px;">✗ できないこと</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">数字の書き換え・都合の悪い期間の非表示・損失取引の削除</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 14px 16px;">
+            <div style="color: var(--gold); font-size: 0.75rem; font-weight: 700; margin-bottom: 6px;">✓ 公開されるもの</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted); line-height: 1.6;">全取引履歴・損益・ポジション・ロスカット有無がすべてリアルタイム表示</div>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text); font-weight: 600; line-height: 1.7;">
+          つまり、REALTRADEで記録された実績は<span style="color: var(--gold);">「ごまかしようのない本物の証拠」</span>です。<br>
+          天照は3年間、この透明な環境で運用し続けた実績があります。
+        </p>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <img src="スクリーンショット (3).png" alt="REALTRADEフォワード運用データ" style="width:100%; max-width:700px; border-radius:10px; border: 1px solid rgba(201,168,76,0.3);">
+        <p style="font-size:0.78rem; color: var(--text-muted); margin-top:10px;">※ REALTRADEにて記録された実際の運用口座データ</p>
+      </div>
+    </div>
+
+
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-year">2017年3月</div>
+        <div class="timeline-text">EA原型の開発・自己運用開始</div>
+        <div class="timeline-sub">自身の口座で運用を開始。ロスカットを経験しながらも月平均50%の利益を達成。3年間改良を重ね、配布版EAを完成させる。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2020年12月</div>
+        <div class="timeline-text">無料配布を開始</div>
+        <div class="timeline-sub">コロナ相場などの影響を受けながらも数か月ペースで改良を継続。最大300名以上のユーザーへ展開し、多くの方から歓喜の声が届く。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023年1月</div>
+        <div class="timeline-text">REALTRADEにて運用口座を公開</div>
+        <div class="timeline-sub">リアルタイムでポジション・決済・利益情報を公開開始。3年間のフォワードデータを蓄積・掲載。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2026年1月</div>
+        <div class="timeline-text" style="color: var(--gold);">100万円 → 1000万円達成（利益900万円）</div>
+        <div class="timeline-sub">3年間、一度も強制ロスカットなしで公開運用終了。証拠金を10倍にした本物の実績を確立。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2026年〜</div>
+        <div class="timeline-text">チーム体制を構築・EA更なる進化へ</div>
+        <div class="timeline-sub">運営体制見直しのため一時配布を中断。チームを立ち上げEAのさらなる改良に注力し、天照として新たに配布を再開。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== WHY ===== -->
+<section>
+  <div class="container">
+    <div class="section-label">Developer's Voice</div>
+    <h2 class="section-title">なぜ、この<span>EAをつくったのか</span></h2>
+    <div class="divider"></div>
+
+    <div style="max-width: 760px; margin: 0 auto;" class="fade-in">
+
+      <div style="background: var(--bg3); border: 1px solid rgba(201,168,76,0.15); border-radius: 16px; padding: 40px; position: relative; overflow: hidden; margin-bottom: 24px;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+        <img src="trader.jpg" alt="トレーダーイメージ" style="width:100%; border-radius:10px; margin-bottom:28px; opacity:0.85;">
+        <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 20px;">
+          皆さん、普段どのようにトレードしていますか？ローソク足がこうだからこう。チャートの波がこの形だからこう。平均線、MACD、無駄に出し入れするインジケーター。どのくらい自分の思うように相場が動きますか？
+        </p>
+        <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.9; margin-bottom: 20px;">
+          私はチャートの有料インジケーターを入れまくり、何台ものモニターを監視、高額な情報商材やEAを導入して——<strong style="color: var(--text);">ことごとく負けてきました。</strong>
+        </p>
+        <p style="font-size: 1.05rem; color: var(--text); font-weight: 700; line-height: 1.8; border-left: 3px solid var(--gold); padding-left: 20px;">
+          ある時、気づきました。当たり前だけど、<span style="color: var(--gold);">相場は必ず上下する。</span>教科書に書かれたロジックは絶対に勝ち続けられない。だったら自分でつくろう——上がっても下がっても利益を常に生み続ける、すべての値幅を利益にするEAを。
+        </p>
+      </div>
+
+      <div style="background: var(--bg3); border: 1px solid rgba(201,168,76,0.15); border-radius: 16px; padding: 40px; margin-bottom: 24px;">
+        <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; color: var(--gold);">他EAへの不満をすべて解消しました</h3>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; gap: 14px; align-items: flex-start; font-size: 0.93rem; color: var(--text-muted); line-height: 1.7;">
+            <span style="color: var(--gold); font-weight: 800; min-width: 24px;">①</span>
+            <span>なかなかエントリー・決済しないEAは見ていてつまらない、裁量をつい足したくなる</span>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start; font-size: 0.93rem; color: var(--text-muted); line-height: 1.7;">
+            <span style="color: var(--gold); font-weight: 800; min-width: 24px;">②</span>
+            <span>1つの通貨ペアのポジションでずっと捕まっていて、動きが少なすぎる</span>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start; font-size: 0.93rem; color: var(--text-muted); line-height: 1.7;">
+            <span style="color: var(--gold); font-weight: 800; min-width: 24px;">③</span>
+            <span>逆転しそうなタイミングで無駄に損切り決済されると腹が立つ</span>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start; font-size: 0.93rem; color: var(--text-muted); line-height: 1.7;">
+            <span style="color: var(--gold); font-weight: 800; min-width: 24px;">④</span>
+            <span>VPSやPCに不具合が起きてMT4を再起動するとEAにエラーが起きる</span>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: flex-start; font-size: 0.93rem; color: var(--text-muted); line-height: 1.7;">
+            <span style="color: var(--gold); font-weight: 800; min-width: 24px;">⑤</span>
+            <span>リスクをとってでも確実な利益を生んで、トータルで勝てればいい</span>
+          </div>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.88rem; color: var(--text-muted);">ギャンブラー気質で短期・飽き性な私が感じていた不満を、すべてこのEAで解決しました。</p>
+      </div>
+
+      <div style="background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border: 1px solid rgba(201,168,76,0.25); border-radius: 16px; padding: 40px; text-align: center;">
+        <p style="font-size: 1.05rem; color: var(--text); line-height: 1.9; margin-bottom: 16px;">
+          もう、<strong style="color: var(--gold);">「上がってくれ！下がってくれ！」</strong>とチャートを睨む生活は終わりです。
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px;">
+          このEAは相場が上がりそうか下がりそうかは見ていません。<br>
+          相場の本質——<strong style="color: var(--text);">「必ず上下する」</strong>という事実に着目し、数学的ロジックを組み合わせました。<br>
+          他のEAとは趣旨が全く異なります。<strong style="color: var(--gold);">原点にして頂点</strong>だと思っています。
+        </p>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;">
+          裁量トレードをしても、EAを稼働させても負け続けてきた方へ。<br>
+          私のFXの考え方に少しでも共感できる部分があれば、一度このEAに賭けてみる価値はないでしょうか？
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ===== FEATURES ===== -->
+<section>
+  <div class="container">
+    <div class="section-label">9 Features</div>
+    <h2 class="section-title">天照<span>9つの強み</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">他のEAと一線を画す、天照独自のロジックと設計思想。</p>
+
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 01</div>
+        <div class="feature-title">最大8通貨ペア同時稼働</div>
+        <div class="feature-desc">同時稼働通貨ペア数の制限なし。スプレッドの低い通貨ペアを選んで最大8ペアを同時に稼働できます。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 02</div>
+        <div class="feature-title">圧倒的な超高頻度トレード</div>
+        <div class="feature-desc">エントリー直後から利確・ナンピンを繰り返し、ポジションが無駄に捕まることがない設計。常に相場を動かし続けます。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 03</div>
+        <div class="feature-title">3年で資金10倍の実績</div>
+        <div class="feature-desc">証拠金100万円を3年間で1000万円に成長させたフォワードデータが証明。バックテストではなく本物の実績です。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 04</div>
+        <div class="feature-title">平均月利25%</div>
+        <div class="feature-desc">3年間900万円の利益を達成。月平均25%のリターンを継続的に記録しています。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 05</div>
+        <div class="feature-title">最大月利100%超えも</div>
+        <div class="feature-desc">ポジション数に応じて利確幅を自動で拡大する設計。少ない枚数では素早く利確を積み上げ、ナンピンが深くなるほど利確幅を大きく取ることで爆発的な利益を狙います。大きなナンピンポジションの一斉決済時は月利100%超えも。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 06</div>
+        <div class="feature-title">24時間完全放置でOK</div>
+        <div class="feature-desc">設置後は24時間365日、設定を触る必要なし。経済指標発表時も自動で対応します。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 07</div>
+        <div class="feature-title">再起動・裁量でのエラーなし</div>
+        <div class="feature-desc">VPSやPCの再起動後もポジション倍増やシステムエラーが発生しない設計。安心して運用できます。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 08</div>
+        <div class="feature-title">急変動時も待機システムで安心</div>
+        <div class="feature-desc">相場の異常を感知するとナンピンの追撃を自動待機。過度なドローダウンを防止します。</div>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">FEATURE 09</div>
+        <div class="feature-title">複利運用対応</div>
+        <div class="feature-desc">パラメータ調整で証拠金の増加に合わせた複利運用が可能。資産を雪だるま式に増やせます。</div>
+      </div>
+    </div>
+
+    <div style="max-width:900px; margin:40px auto 0; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.28); border-radius:14px; padding:28px 32px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+        <div style="background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#000; font-size:0.68rem; font-weight:900; padding:4px 12px; border-radius:20px; letter-spacing:0.1em; white-space:nowrap;">天照の特長</div>
+        <div style="font-size:1rem; font-weight:800; color:var(--text);">全ユーザーが異なる注文になる設計</div>
+      </div>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.9;">
+        天照は稼働した瞬間からエントリーが始まるため、稼働タイミングが違えば全員のポジションが異なります。そのため利益率も人によって変わりますが、これは同時に大きなメリットでもあります。<br><br>
+        同じEAを多くの人が利用していると、全員が同じタイミングで同じ注文を出すことになり、<strong style="color:var(--text);">証券会社から制限をかけられるリスク</strong>があります。天照は全ユーザーが常に違う注文を出す仕組みになっているため、そのような制限の心配がありません。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== LOGIC ===== -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-label">Logic</div>
+    <h2 class="section-title">圧倒的な<span>高頻度トレード</span></h2>
+    <div class="divider"></div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;" class="fade-in logic-inner">
+      <div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="background: var(--bg3); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 18px 20px;">
+            <div style="font-weight: 800; margin-bottom: 6px;">常時エントリー</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">EA稼働中はすべての通貨ペアで買いか売りのどちらかに必ずエントリー。相場が止まっても稼ぎ続けます。</div>
+          </div>
+          <div style="background: var(--bg3); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 18px 20px;">
+            <div style="font-weight: 800; margin-bottom: 6px;">両建て＋変則幅ナンピン</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">利益方向なら利確、逆行なら両建てとナンピンを開始。よくある〇pips毎に2倍ロットの単純ナンピンとは異なり、価格変動幅に応じてエントリーポジションを調整します。</div>
+          </div>
+          <div style="background: var(--bg3); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 18px 20px;">
+            <div style="font-weight: 800; margin-bottom: 6px;">相場反転感知で一斉決済</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">相場の反転を感知すると待機していた複数ポジションが同時エントリー。効率的にポジション解消を行い、高頻度で利益を積み重ねます。</div>
+          </div>
+          <div style="background: var(--bg3); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 18px 20px;">
+            <div style="font-weight: 800; margin-bottom: 6px;">ポジション数に連動した可変利確</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">利確幅はポジション数に応じて自動で変化します。少ない枚数では素早く利確を積み重ね、ナンピンが深くなるほど大きな利確幅を設定することで爆益を狙う設計。詳細な数値は非公開ですが、常に最大効率を追求するアルゴリズムを採用しています。</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="rogi.png" alt="ロジック説明図" style="width:100%; border-radius:12px; border: 1px solid rgba(201,168,76,0.2);">
+      </div>
+    </div>
+
+    <style>
+      @media (max-width: 700px) {
+        .logic-grid { grid-template-columns: 1fr !important; }
+      }
+    </style>
+  </div>
+</section>
+
+
+<!-- ===== PARAMETERS ===== -->
+<section>
+  <div class="container">
+    <div class="section-label">Parameters</div>
+    <h2 class="section-title">パラメータ<span>設定</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">基本はデフォルトのままでOK。以下の項目だけ確認してください。</p>
+
+    <div style="background: var(--bg3); border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 28px 32px; margin-bottom: 32px;" class="fade-in">
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px;">
+        <li style="display: flex; gap: 14px; align-items: flex-start;">
+          <span style="color: var(--gold); font-weight: 800; min-width: 24px;">①</span>
+          <div><strong>Lot</strong>：運用したいロット数を設定。0.01Lot運用の場合は <code style="background:rgba(255,255,255,0.06); padding: 2px 8px; border-radius:4px;">0.001</code>、0.02Lotの場合は <code style="background:rgba(255,255,255,0.06); padding: 2px 8px; border-radius:4px;">0.002</code></div>
+        </li>
+        <li style="display: flex; gap: 14px; align-items: flex-start;">
+          <span style="color: var(--gold); font-weight: 800; min-width: 24px;">②</span>
+          <div><strong>スリップページ・スプレッド制限</strong>：基本はデフォルトでOK</div>
+        </li>
+        <li style="display: flex; gap: 14px; align-items: flex-start;">
+          <span style="color: var(--gold); font-weight: 800; min-width: 24px;">③</span>
+          <div><strong>マジックナンバー</strong>：他のEAと被らない番号を設定してください</div>
+        </li>
+        <li style="display: flex; gap: 14px; align-items: flex-start;">
+          <span style="color: var(--gold); font-weight: 800; min-width: 24px;">④</span>
+          <div><strong>ポジション設定</strong>：【Long＆Short】を選択し、<strong>自動売買を許可する ✅</strong> にチェック必須</div>
+        </li>
+      </ul>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" class="fade-in para-grid">
+      <div>
+        <img src="para1.png" alt="パラメータ設定①" style="width:100%; border-radius:12px; border: 1px solid rgba(201,168,76,0.2);">
+      </div>
+      <div>
+        <img src="para2.png" alt="パラメータ設定②" style="width:100%; border-radius:12px; border: 1px solid rgba(201,168,76,0.2);">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== OVERVIEW ===== -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-label">Spec</div>
+    <h2 class="section-title">EA<span>基本情報</span></h2>
+    <div class="divider"></div>
+    <br>
+
+    <table class="overview-table fade-in">
+      <tr>
+        <th>対応証券会社</th>
+        <td>XM Trading（KIWAMI口座推奨、Standard口座も可）</td>
+      </tr>
+      <tr>
+        <th>対応通貨ペア</th>
+        <td>全通貨ペア対応<br>
+          推奨：EURUSD / GBPUSD / USDJPY / AUDUSD /<br>
+          USDCAD / USDCHF / NZDUSD / EURJPY（計8ペア）</td>
+      </tr>
+      <tr>
+        <th>時間足</th>
+        <td>M5（5分足）</td>
+      </tr>
+      <tr>
+        <th>取引ロジック</th>
+        <td>両建て・変則幅ナンピン型</td>
+      </tr>
+      <tr>
+        <th>ナンピン</th>
+        <td>最大9回 / 最大合計Lot：<strong>0.41Lot</strong>（0.01Lot運用の場合）</td>
+      </tr>
+      <tr>
+        <th>稼働時間</th>
+        <td>MT4時間 02:00〜24:00<br><small style="color:var(--text-muted);">不利なスプレッドを避けるため、MT4時間0時〜2時（日本時間早朝の2時間）はエントリー・決済を行いません。</small></td>
+      </tr>
+      <tr>
+        <th>配布条件</th>
+        <td>当ページ掲載のXM紹介リンクからの口座開設<br>
+          <small style="color: var(--text-muted);">※紐付け口座でのみ動作します</small></td>
+      </tr>
+      <tr>
+        <th>料金</th>
+        <td>完全無料（月額・初期費用なし）</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===== FREE REASON ===== -->
+<section>
+  <div class="container">
+    <div class="section-label">Why Free</div>
+    <h2 class="section-title">なぜ<span>無料</span>なのか</h2>
+    <div class="divider"></div>
+
+    <div style="max-width: 700px; margin: 0 auto;" class="fade-in">
+      <div style="background: var(--bg3); border: 1px solid rgba(201,168,76,0.15); border-radius: 16px; padding: 40px; position: relative; overflow: hidden; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+        <div style="font-size: 3rem; margin-bottom: 20px;">🤝</div>
+        <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">Win-Winの仕組みで成り立っています</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 24px;">
+          当EAは、XMの<strong style="color: var(--text);">紹介リンクからの口座開設</strong>を条件にしています。口座が開設されると、証券会社から紹介報酬が発生します。この報酬がEAを無料で配布できる仕組みです。
+        </p>
+        <div style="background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; text-align: left;">
+          <div style="font-weight: 800; margin-bottom: 10px; color: var(--gold);">あなたには一切デメリットなし</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8;">
+            証券会社からの報酬なので、普通に口座を開設した場合と条件は何も変わりません。スプレッドが広くなるなど、利益が不利になることは一切ありません。
+          </p>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text); font-weight: 600;">
+          あなたが利益を出せばEAを使い続けてもらえる。<br>
+          だからこそ、本当に勝てるEAをつくることが私の利益にもなります。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== STEPS ===== -->
+<section class="steps">
+  <div class="container">
+    <div class="section-label">How to Get</div>
+    <h2 class="section-title">申請方法<span>3ステップ</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">最短10分で申請完了。完全無料でEAを受け取れます。</p>
+
+    <div class="steps-grid fade-in">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">XMの口座を開設</div>
+        <div class="step-desc">下記の専用リンクからXM Tradingの口座を開設してください。KIWAMI口座を推奨します。</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">公式LINEに登録</div>
+        <div class="step-desc">公式LINEを友だち追加して、口座番号などの必要情報をお送りください。</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">EAを受け取る</div>
+        <div class="step-desc">確認後、EAファイルを発行してお渡しします。設定方法もサポートします。</div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="https://affx.click/EtA7p" target="_blank" class="btn-primary" style="margin-right: 12px; margin-bottom: 12px; display: inline-flex;">
+        ▶ STEP 1：XM口座を開設する
+      </a>
+      <a href="https://lin.ee/pjHSPsb" target="_blank" class="btn-secondary" style="display: inline-flex;">
+        ✉ STEP 2：公式LINEに登録する
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SETUP GUIDE ===== -->
+<section class="guide-section" id="setup-guide">
+  <div class="container">
+    <div class="section-label">Setup Guide</div>
+    <h2 class="section-title">初心者でも<span>迷わない</span>セットアップガイド</h2>
+    <div class="divider"></div>
+    <p class="section-desc">「見たい人だけ見る」折り畳み式。気になるところだけ開いてください。</p>
+
+    <div class="accordion-list">
+
+      <!-- 1. XM口座開設 -->
+      <div class="accordion-item" id="acc1">
+        <div class="accordion-header" onclick="toggleAcc('acc1')">
+          <div class="accordion-step-badge">1</div>
+          <div class="accordion-title-wrap">
+            <div class="accordion-label">STEP 01 — XM口座開設</div>
+            <div class="accordion-title">XM Tradingの口座を開設する</div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-text">
+                <strong>このページのリンクからXM公式サイトにアクセス</strong>
+                <span><a href="https://affx.click/EtA7p" target="_blank" style="color:var(--gold);font-weight:700;text-decoration:underline;">ここ</a>をクリックして口座開設<br>↑※必ずここかHP内のXM口座を開設するボタンから開いてください。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-text">
+                <strong>開設フォームの入力</strong>
+                <span>①居住国【Japan】<br>②口座のブランド【Tradexfin Limited】<br>③Eメール【あなたのメールアドレス】<br>④メールアドレスとパスワードを設定<br>チェックボックスのチェックは不要</span>
+                <img src="ama1.png" alt="開設フォーム" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2); margin-top:10px;">
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-text">
+                <strong>メールを確認して認証</strong>
+                <span>登録したメールに認証メールが届きます。リンクをクリックして認証完了。</span>
+                <img src="ama3.png" alt="認証メール" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2); margin-top:10px;">
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-text">
+                <strong>プロフィールを認証</strong>
+                <span>③でメール認証が完了したら続けてメールが届きます。<br>プロフィールを認証するをクリック。</span>
+                <img src="ama4.png" alt="プロフィール認証画面" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2); margin-top:10px; margin-bottom:10px;">
+                <span>画面に従って入力。<br>TIN＝マイナンバーの12桁の数字のことです。<br>投資家情報の項目は適当でもいいと思います。<br>最後の身分証明書の確認で認証を開始するをクリックして撮影開始。<br>ここまで完了すれば後日本人確認完了の連絡が届きます。</span>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+                  <img src="ama5.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                  <img src="ama6.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                  <img src="ama7.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                  <img src="ama8.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                  <img src="ama9.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                </div>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-text">
+                <strong>証拠金を入金</strong>
+                <span>マイページの「入金」から入金。銀行振込・クレジットカード・bitwallet等に対応。<br>推奨証拠金は <strong style="color:var(--gold);">20万円につき0.01Lot</strong> が目安です。<br>（例：0.01Lot運用 → 20万円、0.02Lot運用 → 40万円）</span>
+              </div>
+            </div>
+          </div>
+          <div class="guide-note">💡 口座番号（MT4 ID）は開設後にメールで届きます。LINEへの申請時に必要になりますので保管しておいてください。</div>
+        </div>
+      </div>
+
+      <!-- 2. MT4ダウンロード -->
+      <div class="accordion-item" id="acc2">
+        <div class="accordion-header" onclick="toggleAcc('acc2')">
+          <div class="accordion-step-badge">2</div>
+          <div class="accordion-title-wrap">
+            <div class="accordion-label">STEP 02 — MT4インストール</div>
+            <div class="accordion-title">MetaTrader4（MT4）をダウンロードする</div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-text">
+                <strong>XMマイページにログイン</strong>
+                <span><a href="https://my.xmtrading.com/jp/member/login" target="_blank" style="color:var(--gold);font-weight:700;text-decoration:underline;">ここ</a>をクリックし登録したメール・パスワードでログイン。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-text">
+                <strong>MT4をダウンロード</strong>
+                <span>ホーム画面左端「さらに表示する」→「プラットフォーム」→「PC対応MT4またはMac対応MT4」をクリック。<br>ダウンロードボタンを押してファイルを開いてインストール。</span>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+                  <img src="ama10.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                  <img src="ama11.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2);">
+                </div>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-text">
+                <strong>MT4を起動してサーバーを選択</strong>
+                <span>MT4を起動すると「ログイン」画面が表示されます。<br>口座開設時に届いたメールを参照に入力。</span>
+                <img src="ama12.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2); margin-top:10px;">
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-text">
+                <strong>ログイン確認</strong>
+                <span>MT4右下のアイコンが緑/青になっていれば成功。</span>
+                <img src="ama13.png" alt="" style="width:100%; border-radius:8px; border:1px solid rgba(201,168,76,0.2); margin-top:10px;">
+              </div>
+            </div>
+          </div>
+          <div class="guide-note">💡 MT4はVPSにもインストールします（STEP 3・4参照）。PCへのインストールは動作確認用として行っておくと安心です。</div>
+          <div class="guide-note" style="margin-top:10px;">
+            🖥️ <strong style="color:var(--gold);">VPS（仮想サーバー）とは？</strong><br><br>
+            VPSとは、クラウド上で24時間365日動き続ける「ネット上のWindowsパソコン」です。<br><br>
+            EAを本番運用する場合、自分のPCを常時起動し続ける必要があります。しかし現実的にはPCのシャットダウン・スリープ・停電・再起動などでMT4が止まってしまいます。<br><br>
+            VPSを使うことで、<strong style="color:var(--text);">あなたがPCを閉じていても・寝ていても・旅行中でも</strong>、MT4とEAが止まらず稼働し続けます。<br><br>
+            月額2,000円前後のコストで、EAの取りこぼしゼロ・完全放置運用が実現できます。
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. VPS契約 -->
+      <div class="accordion-item" id="acc3">
+        <div class="accordion-header" onclick="toggleAcc('acc3')">
+          <div class="accordion-step-badge">3</div>
+          <div class="accordion-title-wrap">
+            <div class="accordion-label">STEP 03 — VPS契約</div>
+            <div class="accordion-title">VPS（仮想サーバー）を契約する</div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-text">
+                <strong>VPSとは？</strong>
+                <span>VPS（仮想専用サーバー）とは、24時間動き続けるクラウド上のWindowsパソコンです。<br>自分のPCを常時起動しておく必要がなくなり、MT4を24時間365日稼働させられます。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-text">
+                <strong>おすすめVPS：お名前.com デスクトップクラウド</strong>
+                <span>「お名前.com デスクトップクラウド」でWin標準プラン（2GB）を選択。<br>月額約2,000円〜。初期費用なし・最短即日利用可能。Windowsなので操作がわかりやすいです。</span>
+                <a href="https://admane.jp/ad/p/r?_site=2091&_article=1953&_link=8078&_image=8628" target="_blank" style="
+                  display: inline-flex; align-items: center; gap: 6px;
+                  margin-top: 10px;
+                  color: var(--gold);
+                  font-size: 0.85rem;
+                  font-weight: 700;
+                  text-decoration: none;
+                  border-bottom: 1px solid rgba(201,168,76,0.4);
+                  padding-bottom: 2px;
+                  transition: opacity 0.2s;
+                " onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                  ▶ お名前.com デスクトップクラウドはこちら
+                </a>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-text">
+                <strong>契約手続き</strong>
+                <span>お名前.comのサイトで「デスクトップクラウド」を検索 → プランを選択 → アカウント登録 → 支払い情報を入力して申し込み完了。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-text">
+                <strong>接続情報を受け取る</strong>
+                <span>契約後にメールで「IPアドレス」「ユーザー名」「パスワード」が届きます。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-text">
+                <strong>VPSにリモート接続する</strong>
+                <span>Windowsの場合：スタートメニューで「リモートデスクトップ接続」を起動 → IPアドレスを入力 → ユーザー名・パスワードでログイン。<br>Macの場合：「Microsoft Remote Desktop」アプリ（無料）を使用します。</span>
+              </div>
+            </div>
+          </div>
+          <div class="guide-note">💡 VPSにログインすると、クラウド上のWindows画面が表示されます。あとは自分のPCと同じように操作できます。</div>
+        </div>
+      </div>
+
+      <!-- 4. EAの設置 -->
+      <div class="accordion-item" id="acc4">
+        <div class="accordion-header" onclick="toggleAcc('acc4')">
+          <div class="accordion-step-badge">4</div>
+          <div class="accordion-title-wrap">
+            <div class="accordion-label">STEP 04 — EA設置</div>
+            <div class="accordion-title">VPSにEAを設置して稼働させる</div>
+          </div>
+          <div class="accordion-arrow">▼</div>
+        </div>
+        <div class="accordion-body">
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="guide-step-num">1</div>
+              <div class="guide-step-text">
+                <strong>VPS上にMT4をインストール</strong>
+                <span>VPSにリモート接続した状態で、STEP 2と同じ手順でMT4をダウンロード・インストール・ログインします。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">2</div>
+              <div class="guide-step-text">
+                <strong>EAファイルをVPSに転送</strong>
+                <span>受け取ったEAファイル（<code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:4px;">天照.ex4</code>）を自分のPCからVPSへコピーします。<br>リモートデスクトップ接続時にローカルリソース設定でドライブを共有するか、OneDriveやGoogleドライブ経由で転送するのが簡単です。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">3</div>
+              <div class="guide-step-text">
+                <strong>EAファイルを所定のフォルダに配置</strong>
+                <span>MT4メニューの「ファイル」→「データフォルダを開く」→ <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:4px;">MQL4 → Experts</code> フォルダに <code style="background:rgba(255,255,255,0.08); padding:2px 6px; border-radius:4px;">天照.ex4</code> をコピー。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">4</div>
+              <div class="guide-step-text">
+                <strong>MT4を再起動</strong>
+                <span>MT4を一度終了して再起動すると、ナビゲーターの「エキスパートアドバイザー」に「天照」が表示されます。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">5</div>
+              <div class="guide-step-text">
+                <strong>通貨ペアのチャートを開く</strong>
+                <span>EURUSD・GBPUSDなど稼働させたい通貨ペアのチャートを開き、時間足を <strong style="color:var(--gold);">M5（5分足）</strong> に変更します。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">6</div>
+              <div class="guide-step-text">
+                <strong>EAをチャートにドラッグ＆ドロップ</strong>
+                <span>ナビゲーターの「天照」をチャートにドラッグ。設定画面が開いたら「自動売買を許可する」に <strong style="color:var(--gold);">チェック ✅</strong>。<br>Lotを設定（0.01Lot運用の場合は 0.001）して「OK」をクリック。</span>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="guide-step-num">7</div>
+              <div class="guide-step-text">
+                <strong>稼働確認</strong>
+                <span>チャート右上に <strong style="color:var(--gold);">😊 スマイルマーク</strong> が表示されれば稼働成功です。<br>全通貨ペア分（最大8ペア）同じ手順を繰り返してください。</span>
+              </div>
+            </div>
+          </div>
+          <div class="guide-note">
+            ⏰ <strong style="color:var(--gold);">稼働時間について</strong><br>
+            不利なスプレッドを避けるため、MT4時間 0時〜2時（日本時間の早朝2時間）はエントリー・決済を行いません。それ以外の時間は24時間自動稼働します。<br><br>
+            📊 <strong style="color:var(--gold);">ナンピンの最大Lotについて（0.01Lot運用の場合）</strong><br>
+            最大9回ナンピンし、最大合計Lotは <strong>0.41Lot</strong> になります。証拠金の目安は <strong>20万円につき0.01Lot</strong> です。<br><br>
+            💡 わからないことがあればLINEでサポートします。設置完了まで一緒に確認しますのでお気軽にご連絡ください。
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VPS設置代行オプション -->
+    <div style="max-width:800px; margin:40px auto 0; background:linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03)); border:1px solid rgba(201,168,76,0.35); border-radius:16px; padding:36px 40px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, var(--gold), transparent);"></div>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div style="background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#000; font-size:0.7rem; font-weight:900; padding:5px 14px; border-radius:20px; letter-spacing:0.1em; white-space:nowrap;">オプション</div>
+        <h3 style="font-size:1.15rem; font-weight:900; color:var(--text);">VPS・MT4設置 完全代行サービス</h3>
+      </div>
+      <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.9; margin-bottom:16px;">
+        「VPSの設定が難しそう」「設置でつまずきたくない」という方向けに、VPS契約からMT4インストール・EA設置・稼働確認まで<strong style="color:var(--text);">すべてこちらで代行</strong>します。あなたはVPS契約とXM口座開設だけ済ませればOK。
+      </p>
+      <div style="background:rgba(201,168,76,0.06); border-left:3px solid var(--gold); border-radius:0 8px 8px 0; padding:14px 18px; margin-bottom:20px;">
+        <div style="font-size:0.8rem; font-weight:700; color:var(--gold); margin-bottom:6px;">代行費用：¥5,000（税込）</div>
+        <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.85;">
+          本来EAは無料でお渡ししているため、できる限り負担をおかけしたくない気持ちはあります。ただ、設置作業自体の工数に加え、お客様との情報共有やスクリーンショットのやりとりの中で、環境の違いや手順の行き違いが生じるケースが少なくなく、完了まで想定以上に時間を要することがございます。ご利用者様にも待機のご負担をおかけしてしまうことへの対価として、誠に恐れ入りますが上記の料金を設定させていただいております。
+        </p>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:16px 18px;">
+          <div style="color:var(--gold); font-size:0.72rem; font-weight:700; margin-bottom:8px;">✓ 代行内容</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.83rem; color:var(--text-muted); line-height:1.7;">
+            <li>VPS初期設定・リモート接続確認</li>
+            <li>MT4インストール・ログイン設定</li>
+            <li>EA（天照）のファイル転送・設置</li>
+            <li>全通貨ペアの稼働確認</li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:16px 18px;">
+          <div style="color:var(--gold); font-size:0.72rem; font-weight:700; margin-bottom:8px;">✓ こんな方におすすめ</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.83rem; color:var(--text-muted); line-height:1.7;">
+            <li>PCの操作が苦手な方</li>
+            <li>最速で稼働させたい方</li>
+            <li>設定ミスが不安な方</li>
+            <li>時間を節約したい方</li>
+          </ul>
+        </div>
+      </div>
+      <p style="font-size:0.83rem; color:var(--text-muted); text-align:center; line-height:1.8;">
+        ご希望の方は、公式LINEでのEA申請時に<strong style="color:var(--text);">「VPS設置代行希望」</strong>とあわせてご記入ください。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== Q&A ===== -->
+<section style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある<span>質問</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">気になる点はここで解決。ジャンル別にまとめました。</p>
+
+    <div style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; gap:32px;">
+
+      <!-- EA基本 -->
+      <div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2);">▍ EAについて</div>
+        <div class="accordion-list" style="gap:8px;">
+          <div class="accordion-item" id="faq1">
+            <div class="accordion-header" onclick="toggleAcc('faq1')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">天照はどんなロジックで動いていますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">相場が「必ず上下する」という性質に着目した両建て＋変則ナンピン型のEAです。上がるか下がるかを予測せず、どちらに動いても利益を積み上げる設計になっています。エントリー直後から高頻度で利確を繰り返し、常に相場を動かし続けます。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq2">
+            <div class="accordion-header" onclick="toggleAcc('faq2')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">ナンピンEAはリスクが高いと聞きますが大丈夫ですか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">一般的なナンピンEAは一定pips毎にロットを倍増させるため、急変動時にリスクが膨らみます。天照は価格変動幅に応じてエントリーポジションを調整する「変則幅ナンピン」を採用しており、また相場の異常を感知した際は自動的にナンピンを待機するシステムを搭載しています。3年間強制ロスカットゼロという実績がその安定性を証明しています。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq3">
+            <div class="accordion-header" onclick="toggleAcc('faq3')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">稼働中に自分で裁量トレードしても大丈夫ですか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">EAが稼働している通貨ペアと同じペアで裁量トレードをすると、証拠金に影響が出る可能性があります。EAと裁量は別口座・別通貨ペアで行うことを推奨します。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq4">
+            <div class="accordion-header" onclick="toggleAcc('faq4')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">経済指標の発表時などボラティリティが高い時間帯はどうなりますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">相場の異常な動きを感知するとナンピンの追撃を自動待機するシステムが働きます。スプレッドが著しく拡大するMT4時間0〜2時（日本時間早朝）はエントリー・決済を行わない設計です。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 実績・リスク -->
+      <div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2);">▍ 実績・リスクについて</div>
+        <div class="accordion-list" style="gap:8px;">
+          <div class="accordion-item" id="faq5">
+            <div class="accordion-header" onclick="toggleAcc('faq5')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">100万円→1000万円の実績は本物ですか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">はい、REALTRADEという第三者の実績管理サービスに公開した実際の口座データです。REALTRADEはMT4に専用ファイルを直接インストールして稼働させる仕組みで、取引データがそのままリアルタイムで転送・公開されます。運用者が数字を手動で書き換えることはできない構造です。2023年〜2026年の3年間のフォワードデータとして記録されています。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq6">
+            <div class="accordion-header" onclick="toggleAcc('faq6')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">同じ利益が出る保証はありますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">過去の実績は将来の利益を保証するものではありません。FX取引にはリスクが伴います。ただし同じロジック・設定・証拠金水準での運用であれば、同様の動きになる可能性が高いです。余剰資金での運用を強くお勧めします。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq7">
+            <div class="accordion-header" onclick="toggleAcc('faq7')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">最悪の場合、全損する可能性はありますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">適切な証拠金を維持している限り、3年間強制ロスカットは発生していません。ただし推奨証拠金（20万円につき0.01Lot）を大幅に下回る状態での運用や、極端な相場の歴史的急変動時には証拠金が維持できなくなるリスクはゼロではありません。必ず余剰資金の範囲でご運用ください。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 無料の仕組み -->
+      <div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2);">▍ 無料の仕組み・条件について</div>
+        <div class="accordion-list" style="gap:8px;">
+          <div class="accordion-item" id="faq8">
+            <div class="accordion-header" onclick="toggleAcc('faq8')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">本当に無料ですか？あとから費用が発生しませんか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">EAの初期費用・月額費用は一切かかりません。当ページのXM紹介リンクから口座開設いただくことで、証券会社から紹介報酬が発生する仕組みです。ご利用者様への請求は発生しません。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq9">
+            <div class="accordion-header" onclick="toggleAcc('faq9')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">すでにXMの口座を持っている場合はどうなりますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">既存の口座では紹介リンクとの紐付けができないため、新しく口座を開設していただく必要があります。XMは同一名義で複数口座の開設が可能です。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq10">
+            <div class="accordion-header" onclick="toggleAcc('faq10')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">紹介リンクから開設すると、スプレッドが広くなったりしますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">一切変わりません。報酬は証券会社側からの支払いのため、ご利用者様の取引条件（スプレッド・レバレッジ・ボーナス等）はXM公式と完全に同じです。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 運用・資金 -->
+      <div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2);">▍ 運用・資金について</div>
+        <div class="accordion-list" style="gap:8px;">
+          <div class="accordion-item" id="faq11">
+            <div class="accordion-header" onclick="toggleAcc('faq11')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">最低いくらから始められますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">推奨は0.01Lot運用で証拠金20万円です。1通貨ペアのみでの稼働であればより少ない証拠金でも動作しますが、複数通貨ペアを同時稼働させるほど安定性・収益性が上がるため、20万円以上を推奨しています。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq12">
+            <div class="accordion-header" onclick="toggleAcc('faq12')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">いつでも出金できますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">はい、XMのルールに従っていつでも出金可能です。ただしEA稼働中にポジションを保有している状態での大幅な出金は、証拠金維持率に影響するためご注意ください。出金前にEAを一時停止し、保有ポジションを確認することをお勧めします。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq13">
+            <div class="accordion-header" onclick="toggleAcc('faq13')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">複数の通貨ペアで動かした方がいいですか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">はい、推奨は8通貨ペア同時稼働です。通貨ペアを増やすことでトレード頻度が上がり、リスク分散にもなります。証拠金が許す範囲で可能な限り多くのペアでの稼働を推奨します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- セットアップ・技術 -->
+      <div>
+        <div style="font-size:0.7rem; letter-spacing:0.2em; color:var(--gold); font-weight:700; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid rgba(201,168,76,0.2);">▍ セットアップ・技術的なこと</div>
+        <div class="accordion-list" style="gap:8px;">
+          <div class="accordion-item" id="faq14">
+            <div class="accordion-header" onclick="toggleAcc('faq14')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">スマホだけでも運用できますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">EAの稼働にはWindows PC（またはVPS）が必要です。スマホのMT4アプリではEAを動かすことができません。セットアップ時だけPCが使える環境があればVPS代行オプションもご利用いただけます。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq15">
+            <div class="accordion-header" onclick="toggleAcc('faq15')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">VPSは絶対に必要ですか？自分のPCではダメですか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">24時間365日PCを起動し続けられる環境であればVPSなしでも動作します。ただし停電・スリープ・再起動でEAが止まると機会損失が発生するため、安定運用のためにVPSを強く推奨しています。月額2,000円前後のコストで完全放置運用が実現できます。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq16">
+            <div class="accordion-header" onclick="toggleAcc('faq16')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">設置後にサポートはありますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">はい、公式LINEにてサポートしています。設置でつまずいた場合や稼働確認の方法がわからない場合も、スクリーンショットを送っていただければ確認・対応します。お気軽にご連絡ください。</p>
+            </div>
+          </div>
+          <div class="accordion-item" id="faq17">
+            <div class="accordion-header" onclick="toggleAcc('faq17')" style="padding:16px 20px;">
+              <div class="accordion-title-wrap"><div class="accordion-title" style="font-size:0.92rem;">EAのアップデートはありますか？</div></div>
+              <div class="accordion-arrow">▼</div>
+            </div>
+            <div class="accordion-body" style="padding:0 20px 20px;">
+              <p style="font-size:0.87rem; color:var(--text-muted); line-height:1.85;">相場環境の変化に応じて改良・アップデートを行っています。アップデート時は公式LINEにてお知らせし、新バージョンのEAファイルをお渡しします。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FINAL CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="cta-title">
+      今すぐ<span>無料で</span>始める
+    </h2>
+    <p class="cta-desc">
+      完全無料。初期費用・月額費用ゼロ。<br>
+      XM口座開設 → LINE登録の2ステップで申請完了。
+    </p>
+    <div class="btn-group">
+      <a href="https://affx.click/EtA7p" target="_blank" class="btn-primary">
+        ▶ XM口座を開設する（無料）
+      </a>
+      <a href="https://lin.ee/pjHSPsb" target="_blank" class="btn-secondary">
+        ✉ 公式LINEで申請する
+      </a>
+    </div>
+    <div class="cta-warning">
+      ⚠ FX取引にはリスクが伴います。余剰資金での運用を推奨します。<br>
+      過去の実績は将来の利益を保証するものではありません。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 EA-天照- All rights reserved.</p>
+</footer>
+
+
+<script>
+  // Accordion
+  function toggleAcc(id) {
+    const item = document.getElementById(id);
+    item.classList.toggle('open');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) el.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Sticky nav + back to top
+  const nav = document.getElementById('stickyNav');
+  const topBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.classList.toggle('visible', y > 400);
+    topBtn.classList.toggle('visible', y > 600);
+  });
+</script>
+
+</body>
+</html>
