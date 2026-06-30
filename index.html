@@ -1115,6 +1115,19 @@
 </section>
 
 
+<!-- ===== TRADE ANIMATION ===== -->
+<section style="background: var(--bg2); padding: 80px 20px;">
+  <div class="container">
+    <div class="section-label">LIVE IMAGE</div>
+    <h2 class="section-title">これが<span>天照の動き</span></h2>
+    <div class="divider"></div>
+    <p class="section-desc">エントリー・ナンピン・一斉決済。そのスピードと勢いをイメージしてください。</p>
+    <canvas id="tradeCanvas" style="display:block; width:100%; max-width:900px; margin:0 auto; border-radius:16px; border:1px solid rgba(201,168,76,0.25); cursor:pointer;" title="クリックでリスタート"></canvas>
+    <p style="text-align:center; font-size:0.75rem; color:var(--text-muted); margin-top:12px;">※ イメージアニメーションです。実際の取引画面ではありません　　クリックでリスタート</p>
+  </div>
+</section>
+
+
 <!-- ===== LOGIC ===== -->
 <section style="background: var(--bg2);">
   <div class="container">
@@ -1880,6 +1893,210 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ===== TRADE ANIMATION =====
+  (function() {
+    const canvas = document.getElementById('tradeCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const GOLD = '#c9a84c', GOLD_L = '#f0d080', GREEN = '#26a69a', RED = '#ef5350';
+
+    function resize() {
+      const w = canvas.parentElement ? canvas.parentElement.offsetWidth : 800;
+      canvas.width = Math.min(w, 900);
+      canvas.height = Math.round(canvas.width * 0.44);
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); initState(); });
+
+    let priceY, candles, entries, particles, floatTexts, flashR, flashX, flashY;
+    let phase, phaseF, direction, frame, currentOpen, candleF;
+    const CW = 10, CG = 3, CF = 4;
+
+    function initState() {
+      const h = canvas.height;
+      priceY = h * 0.45; candles = []; entries = []; particles = []; floatTexts = [];
+      flashR = 0; phase = 'build'; phaseF = 0; frame = 0;
+      direction = Math.random() > 0.5 ? 1 : -1;
+      currentOpen = priceY; candleF = 0;
+    }
+    initState();
+    canvas.addEventListener('click', initState);
+
+    function movePrice() {
+      const h = canvas.height;
+      let dy = 0;
+      if (phase === 'build')   dy = -direction * (Math.random() * 1.8 + 0.3) + (Math.random() - 0.5) * 2;
+      else if (phase === 'against') dy = direction * (Math.random() * 2.5 + 0.8) + (Math.random() - 0.5) * 1.5;
+      else if (phase === 'reverse') dy = -direction * (Math.random() * 6 + 5);
+      else dy = (Math.random() - 0.5) * 2;
+      priceY = Math.max(h * 0.08, Math.min(h * 0.92, priceY + dy));
+    }
+
+    function burst(x, y, n, col) {
+      for (let i = 0; i < n; i++) {
+        const a = Math.PI * 2 * i / n + Math.random() * 0.5;
+        const s = 3 + Math.random() * 5;
+        particles.push({ x, y, vx: Math.cos(a)*s, vy: Math.sin(a)*s, life:1, d:0.016+Math.random()*0.012, sz:2+Math.random()*3, col });
+      }
+    }
+
+    function update() {
+      frame++; phaseF++;
+      candleF++;
+      movePrice();
+      if (candleF >= CF) {
+        candles.push({ o: currentOpen, c: priceY, h: Math.min(currentOpen,priceY)-Math.random()*3, l: Math.max(currentOpen,priceY)+Math.random()*3 });
+        currentOpen = priceY; candleF = 0;
+      }
+
+      const w = canvas.width, h = canvas.height;
+      const ex = w - 70;
+
+      if (phase === 'build') {
+        if (phaseF === 28 && !entries.length)
+          entries.push({ y: priceY, type: direction>0?'buy':'sell', alpha:0, x:ex });
+        if (phaseF > 65) { phase = 'against'; phaseF = 0; }
+      }
+      else if (phase === 'against') {
+        if (phaseF % 26 === 0 && entries.length < 5) {
+          entries.push({ y: priceY, type: direction>0?'buy':'sell', alpha:0, x: ex - entries.length*14 });
+          burst(ex, priceY, 8, GOLD);
+        }
+        if (entries.length >= 4 || phaseF > 120) { phase = 'reverse'; phaseF = 0; }
+      }
+      else if (phase === 'reverse') {
+        if (phaseF > 22) { phase = 'close'; phaseF = 0; }
+      }
+      else if (phase === 'close') {
+        if (phaseF === 1) {
+          flashR = 1; flashX = ex; flashY = h / 2;
+          burst(ex, h/2, 32, GOLD_L);
+          const pct = 15 + entries.length * 9 + Math.floor(Math.random()*12);
+          floatTexts.push({ x:ex, y:h/2-10, text:`+${pct}%　決済！`, sz:20+entries.length*3, life:1 });
+          entries = [];
+        }
+        if (phaseF > 85) { phase='build'; phaseF=0; direction*=-1; }
+      }
+
+      entries.forEach(e => { e.alpha = Math.min(1, e.alpha+0.1); });
+      particles.forEach(p => { p.x+=p.vx; p.y+=p.vy; p.vy+=0.13; p.life-=p.d; });
+      particles = particles.filter(p => p.life > 0);
+      floatTexts.forEach(t => { t.y-=1.2; t.life-=0.009; });
+      floatTexts = floatTexts.filter(t => t.life > 0);
+      if (flashR > 0) flashR -= 0.032;
+    }
+
+    function draw() {
+      const w = canvas.width, h = canvas.height;
+      ctx.fillStyle = '#060710';
+      ctx.fillRect(0, 0, w, h);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(201,168,76,0.05)'; ctx.lineWidth = 1;
+      for (let i = 1; i < 5; i++) { ctx.beginPath(); ctx.moveTo(0,h*i/5); ctx.lineTo(w,h*i/5); ctx.stroke(); }
+
+      // Candles
+      const vis = Math.floor((w - 90) / (CW+CG));
+      const sl = Math.max(0, candles.length - vis);
+      candles.slice(sl).forEach((c, i) => {
+        const x = i*(CW+CG)+8;
+        const up = c.c <= c.o;
+        ctx.fillStyle = ctx.strokeStyle = up ? GREEN : RED;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x+CW/2, c.h); ctx.lineTo(x+CW/2, c.l); ctx.stroke();
+        ctx.fillRect(x, Math.min(c.o,c.c), CW, Math.max(Math.abs(c.c-c.o), 2));
+      });
+
+      // Forming candle
+      const fx = Math.min(candles.length, vis-1)*(CW+CG)+8;
+      const fup = priceY <= currentOpen;
+      ctx.globalAlpha = 0.65; ctx.fillStyle = fup ? GREEN : RED;
+      ctx.fillRect(fx, Math.min(currentOpen,priceY), CW, Math.max(Math.abs(priceY-currentOpen),2));
+      ctx.globalAlpha = 1;
+
+      // Price line
+      ctx.strokeStyle='rgba(201,168,76,0.35)'; ctx.lineWidth=1; ctx.setLineDash([3,5]);
+      ctx.beginPath(); ctx.moveTo(0,priceY); ctx.lineTo(w-56,priceY); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Price label
+      ctx.fillStyle=GOLD; ctx.fillRect(w-54,priceY-10,50,20);
+      ctx.fillStyle='#000'; ctx.font='bold 10px monospace'; ctx.textAlign='center';
+      const fp = (150 + (h/2-priceY)*0.05).toFixed(3);
+      ctx.fillText(fp, w-29, priceY+4);
+
+      // Vertical divider
+      ctx.strokeStyle='rgba(201,168,76,0.12)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(w-85,0); ctx.lineTo(w-85,h); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Nanpin connecting line
+      if (entries.length > 1) {
+        ctx.strokeStyle='rgba(201,168,76,0.28)'; ctx.lineWidth=1; ctx.setLineDash([3,5]);
+        ctx.beginPath();
+        entries.forEach((e,i) => i===0 ? ctx.moveTo(e.x,e.y) : ctx.lineTo(e.x,e.y));
+        ctx.stroke(); ctx.setLineDash([]);
+      }
+
+      // Entries
+      entries.forEach((e, idx) => {
+        ctx.globalAlpha = e.alpha;
+        const grd = ctx.createRadialGradient(e.x,e.y,0,e.x,e.y,22);
+        grd.addColorStop(0,'rgba(201,168,76,0.3)'); grd.addColorStop(1,'rgba(201,168,76,0)');
+        ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(e.x,e.y,22,0,Math.PI*2); ctx.fill();
+
+        ctx.fillStyle = GOLD; ctx.shadowColor = GOLD; ctx.shadowBlur = 10;
+        ctx.beginPath();
+        if (e.type==='buy') { ctx.moveTo(e.x,e.y-10); ctx.lineTo(e.x-7,e.y+5); ctx.lineTo(e.x+7,e.y+5); }
+        else { ctx.moveTo(e.x,e.y+10); ctx.lineTo(e.x-7,e.y-5); ctx.lineTo(e.x+7,e.y-5); }
+        ctx.closePath(); ctx.fill(); ctx.shadowBlur=0;
+
+        const pulse = (Math.sin(frame*0.13+idx*1.4)+1)*0.5;
+        ctx.strokeStyle=`rgba(201,168,76,${0.15+pulse*0.45})`; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.arc(e.x,e.y,13+pulse*8,0,Math.PI*2); ctx.stroke();
+
+        ctx.fillStyle=GOLD; ctx.font='bold 9px monospace'; ctx.textAlign='left';
+        ctx.fillText(e.type==='buy'?'BUY▲':'SELL▼', e.x+14, e.y+4);
+        ctx.globalAlpha=1;
+      });
+
+      // Flash
+      if (flashR > 0) {
+        const r = (1-flashR)*w*0.55;
+        const grd = ctx.createRadialGradient(flashX,flashY,0,flashX,flashY,r);
+        grd.addColorStop(0,`rgba(240,208,128,${flashR*0.75})`);
+        grd.addColorStop(0.4,`rgba(201,168,76,${flashR*0.3})`);
+        grd.addColorStop(1,'rgba(201,168,76,0)');
+        ctx.fillStyle=grd; ctx.beginPath(); ctx.arc(flashX,flashY,r,0,Math.PI*2); ctx.fill();
+      }
+
+      // Particles
+      particles.forEach(p => {
+        ctx.globalAlpha=p.life; ctx.fillStyle=p.col;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2); ctx.fill();
+      }); ctx.globalAlpha=1;
+
+      // Float texts
+      floatTexts.forEach(t => {
+        ctx.globalAlpha=t.life; ctx.fillStyle=GOLD_L;
+        ctx.font=`bold ${t.sz}px 'Noto Sans JP',sans-serif`;
+        ctx.textAlign='center'; ctx.shadowColor=GOLD; ctx.shadowBlur=14;
+        ctx.fillText(t.text, t.x, t.y); ctx.shadowBlur=0;
+      }); ctx.globalAlpha=1;
+
+      // Labels
+      ctx.fillStyle='rgba(201,168,76,0.45)'; ctx.font='10px monospace'; ctx.textAlign='left';
+      ctx.fillText('EA-天照- TRADE IMAGE', 10, 18);
+      const pl = {build:'▶ エントリー',against:'↕ ナンピン中',reverse:'⚡ 反転！',close:'✓ 一斉決済！'}[phase]||'';
+      ctx.textAlign='right';
+      ctx.fillStyle = phase==='reverse'||phase==='close' ? GOLD_L : 'rgba(201,168,76,0.55)';
+      ctx.fillText(pl, w-10, 18);
+    }
+
+    function loop() { update(); draw(); requestAnimationFrame(loop); }
+    loop();
+  })();
 
   // Sticky nav + back to top
   const nav = document.getElementById('stickyNav');
